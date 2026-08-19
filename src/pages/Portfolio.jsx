@@ -29,17 +29,26 @@ const SUB_TABS = {
     { label: 'Business', key: 'business' },
     { label: 'Coaching', key: 'coaching' },
     { label: 'Figma', key: 'figma' },
+    { label: 'Mobile Apps', key: 'mobileapp' },
   ],
   animation: [
     { label: 'All Animation', key: 'all' },
     { label: 'SaaS UI', key: 'saas_anim' },
+    { label: 'SaaS Explainer', key: 'saas_explainer' },
     { label: '2D Explainer', key: 'explainer2d' },
+    { label: 'Mobile App', key: 'mobileapp' },
     { label: '3D Animation', key: 'anim3d' },
-    { label: 'Logo', key: 'logo_anim' },
+    { label: 'Logo Anim', key: 'logo_anim' },
     { label: 'Whiteboard', key: 'whiteboard' },
     { label: '2D Cartoon', key: 'cartoon' },
+    { label: 'Anime Style', key: 'anime' },
+    { label: 'Hand Drawn', key: 'handdrawn' },
     { label: 'Motion Graphics', key: 'motion' },
-    { label: 'Mobile App', key: 'mobileapp' },
+    { label: 'Promotional', key: 'promotional' },
+    { label: 'Product Anim', key: 'productanim' },
+    { label: 'Character Anim', key: 'character' },
+    { label: 'UI Dashboard', key: 'uidashanim' },
+    { label: 'Loading Anim', key: 'loading' },
     { label: 'Showreel', key: 'showreel' },
     { label: 'Video Editing', key: 'videoediting' },
   ],
@@ -50,11 +59,13 @@ const SUB_TABS = {
     { label: 'Business Cards', key: 'bizcards' },
     { label: 'Packaging', key: 'packaging' },
     { label: 'Branding', key: 'branding' },
+    { label: 'Logo Designs', key: 'logos' },
     { label: 'Infographics', key: 'infographics' },
     { label: "Children's Book", key: 'childrensbook' },
     { label: 'Dashboards', key: 'dashboards' },
     { label: 'Book Covers', key: 'bookcovers' },
     { label: 'Illustrations', key: 'illustrations' },
+    { label: 'Posters', key: 'posters' },
   ],
 };
 
@@ -111,18 +122,17 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
   const isAnimation = item.group === 'animation';
   const isDesign = item.group === 'design';
 
-  // Determine the link target
   const handleCardClick = useCallback(() => {
     if (isAnimation && item.ytId) {
       onPlayVideo(item.ytId);
     } else if (isWebsite && item.url) {
       window.open(item.url, '_blank', 'noopener,noreferrer');
-    } else if (isDesign && item.driveId) {
+    } else if (item.driveId) {
       window.open(`https://drive.google.com/file/d/${item.driveId}/view`, '_blank', 'noopener,noreferrer');
     }
-  }, [item, isAnimation, isWebsite, isDesign, onPlayVideo]);
+  }, [item, isAnimation, isWebsite, onPlayVideo]);
 
-  const isClickable = (isAnimation && item.ytId) || (isWebsite && item.url) || (isDesign && item.driveId);
+  const isClickable = (isAnimation && item.ytId) || (isWebsite && item.url) || item.driveId;
 
   return (
     <motion.div
@@ -138,7 +148,6 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
       <div className="glass-card overflow-hidden flex flex-col h-full hover:border-primary/40 transition-all duration-500 hover:shadow-[0_20px_60px_-10px_rgba(99,102,241,0.2)] hover:-translate-y-1">
         {/* Thumbnail */}
         <div className="aspect-video relative overflow-hidden bg-surface flex items-center justify-center">
-          {/* Image */}
           {item.driveId ? (
             <img
               src={`https://lh3.googleusercontent.com/d/${item.driveId}=w600`}
@@ -154,7 +163,6 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
                 className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
                 loading="lazy"
               />
-              {/* Play button overlay */}
               <div className="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/50 transition-colors duration-300">
                 <motion.div
                   whileHover={{ scale: 1.15 }}
@@ -166,24 +174,20 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
                 </motion.div>
               </div>
             </>
-          ) : item.url ? (
-            <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-primary/10 to-secondary/10 flex items-center justify-center">
               <div className="text-5xl font-display font-bold text-primary/30 group-hover:text-primary/60 group-hover:scale-110 transition-all duration-500">
                 {item.name.charAt(0)}
               </div>
             </div>
-          ) : (
-            <div className="text-5xl font-display font-bold text-primary/20 group-hover:text-primary/40 group-hover:scale-110 transition-all duration-500">
-              {item.name.charAt(0)}
-            </div>
           )}
 
-          {/* Category badge */}
+          {/* Badge */}
           <div className="absolute top-3 left-3 px-3 py-1 bg-black/60 backdrop-blur-md rounded-full text-xs font-semibold text-white border border-white/10">
             {item.blurb}
           </div>
 
-          {/* Link icon badge for websites */}
+          {/* Link icon */}
           {isWebsite && item.url && (
             <div className="absolute top-3 right-3 w-8 h-8 bg-black/60 backdrop-blur-md rounded-full flex items-center justify-center border border-white/10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <span className="text-xs text-white">↗</span>
@@ -196,19 +200,13 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
               <span className="text-xs font-bold uppercase tracking-wider text-primary mb-1 block">{item.cat}</span>
               <h3 className="text-base font-bold text-white">{item.name}</h3>
               {isWebsite && item.url && (
-                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">
-                  Visit Site <span>↗</span>
-                </span>
+                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">Visit Site ↗</span>
               )}
               {isAnimation && item.ytId && (
-                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">
-                  ▶ Watch Video
-                </span>
+                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">▶ Watch Video</span>
               )}
-              {isDesign && item.driveId && (
-                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">
-                  View Design ↗
-                </span>
+              {item.driveId && (
+                <span className="text-xs text-primary/80 flex items-center gap-1 mt-1">View ↗</span>
               )}
             </div>
           </div>
@@ -219,7 +217,6 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
           <span className="text-xs font-bold uppercase tracking-wider text-primary mb-1">{item.cat}</span>
           <h3 className="text-sm font-bold mb-2 group-hover:text-primary transition-colors duration-300">{item.name}</h3>
 
-          {/* Link row */}
           {isWebsite && item.url && (
             <a
               href={item.url}
@@ -240,7 +237,7 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
               <span className="text-primary">▶</span> Watch on YouTube
             </button>
           )}
-          {isDesign && item.driveId && (
+          {item.driveId && (
             <a
               href={`https://drive.google.com/file/d/${item.driveId}/view`}
               target="_blank"
@@ -248,7 +245,7 @@ function PortfolioCard({ item, idx, onPlayVideo }) {
               onClick={e => e.stopPropagation()}
               className="text-xs text-textMuted hover:text-primary mt-auto flex items-center gap-1 transition-colors duration-200"
             >
-              View Full Design ↗
+              View on Drive ↗
             </a>
           )}
         </div>
@@ -289,12 +286,10 @@ export default function Portfolio() {
 
   return (
     <div className="pt-20 pb-32 overflow-hidden">
-      {/* ─── Hero Header ─── */}
+      {/* Hero */}
       <header className="relative py-20 md:py-28 text-center overflow-hidden">
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_60%_50%_at_50%_0%,rgba(99,102,241,0.12)_0%,transparent_70%)] pointer-events-none" />
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.015)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.015)_1px,transparent_1px)] bg-[size:60px_60px] pointer-events-none" />
-
-        {/* Animated orbs */}
         <motion.div
           animate={{ rotate: 360 }}
           transition={{ duration: 120, repeat: Infinity, ease: 'linear' }}
@@ -326,7 +321,7 @@ export default function Portfolio() {
       </header>
 
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        {/* ─── Top Tabs ─── */}
+        {/* Top Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-6">
           {TOP_TABS.map((tab) => (
             <motion.button
@@ -346,7 +341,7 @@ export default function Portfolio() {
           ))}
         </div>
 
-        {/* ─── Sub-Tabs (only when a group is selected) ─── */}
+        {/* Sub-Tabs */}
         <AnimatePresence mode="wait">
           {currentSubTabs && (
             <motion.div
@@ -379,7 +374,7 @@ export default function Portfolio() {
           {filteredItems.length} project{filteredItems.length !== 1 ? 's' : ''}
         </motion.p>
 
-        {/* ─── Grid ─── */}
+        {/* Grid */}
         <motion.div layout className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
           <AnimatePresence mode="popLayout">
             {filteredItems.map((item, idx) => (
@@ -394,7 +389,7 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* ─── Bottom CTA ─── */}
+      {/* Bottom CTA */}
       <section className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 mt-32 text-center">
         <motion.div
           initial={{ opacity: 0, y: 30, scale: 0.95 }}
@@ -414,7 +409,7 @@ export default function Portfolio() {
         </motion.div>
       </section>
 
-      {/* ─── YouTube Modal ─── */}
+      {/* YouTube Modal */}
       {activeVideo && (
         <YTModal ytId={activeVideo} onClose={() => setActiveVideo(null)} />
       )}
