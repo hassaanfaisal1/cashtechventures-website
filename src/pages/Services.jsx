@@ -12,12 +12,17 @@ const staggerContainer = {
 };
 
 const services = [
-  { icon: '🛒', title: 'E-Commerce Development', desc: 'Storefronts built to convert on Shopify, Magento, and WooCommerce.', tags: ['Shopify', 'Magento', 'WooCommerce'] },
-  { icon: '🧱', title: 'CMS & Website Development', desc: 'Marketing sites, brochure sites and content-managed platforms.', tags: ['WordPress', 'Webflow', 'Wix', 'Squarespace'] },
-  { icon: '⚛️', title: 'Custom Web Apps', desc: 'Bespoke front-ends and interactive product experiences built with modern frameworks.', tags: ['React', 'Framer', 'Next.js'] },
-  { icon: '🤖', title: 'AI-Powered Apps', desc: 'AI receptionist agents, rapid AI-built prototypes, and custom software.', tags: ['Custom AI', 'SaaS', 'Prototyping'] },
-  { icon: '🎨', title: 'UI/UX & Product Design', desc: 'Wireframes, design systems and high-fidelity prototypes ready to hand off to engineering.', tags: ['Figma', 'Design Systems', 'Prototyping'] },
-  { icon: '✨', title: '3D, Animation & Motion', desc: 'Interactive 3D scenes and motion-rich brand experiences that make sites memorable.', tags: ['3D', 'Motion Design', 'WebGL'] },
+  { icon: '🎬', title: 'SaaS Video', desc: 'Engaging videos to showcase your SaaS products.', tags: ['SaaS', 'Video'] },
+  { icon: '🎨', title: '2D Animation', desc: 'Bring ideas to life with high-quality 2D animations.', tags: ['2D', 'Animation'] },
+  { icon: '💻', title: 'Web Dev', desc: 'Custom, performant, and scalable web applications.', tags: ['React', 'Next.js', 'Custom'] },
+  { icon: '✂️', title: 'Video Editing', desc: 'Professional video editing for all platforms.', tags: ['Editing', 'Post-Production'] },
+  { icon: '✨', title: 'Brand Identity & Graphic Design', desc: 'Stand out with a memorable brand identity.', tags: ['Branding', 'Graphics'] },
+  { icon: '📝', title: 'Story Boarding & Script Development', desc: 'Compelling narratives and visual storyboards.', tags: ['Script', 'Story'] },
+  { icon: '🤖', title: 'AI Powered Creative Production', desc: 'Cutting-edge AI tools for fast, creative content.', tags: ['AI', 'Creative'] },
+  { icon: '📱', title: 'Social Media Creative Content', desc: 'Scroll-stopping content for your social feeds.', tags: ['Social Media', 'Content'] },
+  { icon: '👁️', title: 'Visual Solutions', desc: 'Comprehensive visual strategies for your brand.', tags: ['Visuals', 'Strategy'] },
+  { icon: '📈', title: 'SMM', desc: 'Social Media Marketing to boost your reach.', tags: ['Marketing', 'Social'] },
+  { icon: '🔍', title: 'SEO', desc: 'Search Engine Optimization to rank higher.', tags: ['SEO', 'Ranking'] },
 ];
 
 export default function Services() {

@@ -21,7 +21,7 @@ export default function Contact() {
     const formData = new FormData(form);
     
     try {
-      const res = await fetch('https://api.web3forms.com/submit', {
+      const res = await fetch('https://formsubmit.co/ajax/cashtechventures@gmail.com', {
         method: 'POST',
         body: formData
       });
@@ -64,9 +64,10 @@ export default function Contact() {
             <p className="text-textMuted mb-8 text-sm">Fill in the details below and we'll scope your project and get back to you fast.</p>
             
             <form onSubmit={handleSubmit} className="space-y-6">
-              <input type="hidden" name="access_key" value="99cac168-ae74-4f0f-a3e5-96989c7646c9" />
-              <input type="hidden" name="subject" value="New Project Inquiry — Cashtech Ventures" />
-              <input type="checkbox" name="botcheck" style={{display: 'none'}} />
+              <input type="hidden" name="_subject" value="New Project Inquiry — Cashtech Ventures" />
+              <input type="hidden" name="_captcha" value="false" />
+              <input type="hidden" name="_template" value="box" />
+              <input type="text" name="_honey" style={{display: 'none'}} />
 
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                 <div className="space-y-2">
