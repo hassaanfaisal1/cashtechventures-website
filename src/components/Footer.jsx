@@ -58,7 +58,7 @@ export default function Footer() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
             <div className="md:col-span-1">
               <Link to="/" className="flex items-center space-x-3 mb-4 group">
-                <img src="/logo.jpg" alt="CashTechVentures" className="h-10 w-auto object-contain" />
+                <img src="/logo.png" alt="CashTechVentures" className="h-16 w-auto object-contain" />
               </Link>
               <p className="text-textMuted text-sm leading-relaxed">
                 A full-service digital studio — SaaS videos, 2D animation, web dev, branding, AI creatives, and everything in between.

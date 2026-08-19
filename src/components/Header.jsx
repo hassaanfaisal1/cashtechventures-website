@@ -38,9 +38,9 @@ export default function Header() {
         <div className="flex justify-between items-center h-20">
           <Link to="/" className="flex items-center space-x-3 group">
             <motion.img
-              src="/logo.jpg"
+              src="/logo.png"
               alt="CashTechVentures"
-              className="h-12 w-auto object-contain"
+              className="h-20 w-auto object-contain"
               whileHover={{ scale: 1.05 }}
               transition={{ type: 'spring', stiffness: 300 }}
             />
